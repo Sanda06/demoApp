@@ -1,18 +1,23 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ExampleService } from '../../example.service';
-import { Observable } from 'rxjs';
+import { Component, ChangeDetectionStrategy, input, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Area, ExampleService, Thing } from '../../example.service';
+import { ThingAsyncComponent } from '../thing-async/thing-async.component';
 
 @Component({
   selector: 'app-area-async',
   templateUrl: './area-async.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./area-async.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule, ThingAsyncComponent]
 })
 
 export class AreaAsyncComponent {
-  areas$: Observable<any>;  
+  private exampleService = inject(ExampleService);
 
-  constructor(private exampleService: ExampleService) {
-   
-    this.areas$ = this.exampleService.getAreas();
+  public readonly areas = input<Area[]>();
+  public things$ = this.exampleService.getThings(); 
+
+  getItemsForZone(items: Thing[], areaId: number): Thing[] {
+    return items.filter(item => item.areaId === areaId);
   }
 }

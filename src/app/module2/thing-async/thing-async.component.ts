@@ -1,18 +1,16 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ExampleService } from '../../example.service';
-import { Observable } from 'rxjs';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Thing } from '../../example.service';
 
 @Component({
   selector: 'app-thing-async',
   templateUrl: './thing-async.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./thing-async.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule],
 })
 
 export class ThingAsyncComponent {
-  things$: Observable<any>; 
+  public readonly things = input<Thing[]>();
 
-  constructor(private exampleService: ExampleService) {
-   
-    this.things$ = this.exampleService.getThings();
-  }
 }

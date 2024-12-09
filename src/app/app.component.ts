@@ -1,12 +1,21 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+// import { AreaComponent } from './module1/area/area.component';
+// import { ThingComponent } from './module1/thing/thing.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.scss'],
+  standalone:false
 })
 export class AppComponent {
+  private router = inject(Router);
+  private route= inject(ActivatedRoute);
+
   title = 'demoApp';
+
+  public goTo(path: string){
+    void this.router.navigate([`../${path}`], {relativeTo: this.route});
+  }
 }

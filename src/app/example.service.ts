@@ -1,6 +1,26 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ExampleService {
+  private http = inject(HttpClient);
+
+  private thingsUrl = '/assets/things.json'; 
+  private areasUrl = '/assets/areas.json';
+
+
+  getThings(): Observable<Thing[]> {
+    return this.http.get<Thing[]>(this.thingsUrl);
+  }
+
+  getAreas(): Observable<Area[]> {
+    return this.http.get<Area[]>(this.areasUrl);
+  }
+}
+
 
 export interface Thing {
   id: number;
@@ -15,23 +35,4 @@ export interface Thing {
 export interface Area {
   areaId: number;
   name: string;
-}
-
-@Injectable({
-  providedIn: 'root'
-})
-export class ExampleService {
-
-  private thingsUrl = 'assets/things.json'; 
-  private areasUrl = 'assets/areas.json';
-
-  constructor(private http: HttpClient) { }
-
-  getThings(): Observable<Thing[]> {
-    return this.http.get<Thing[]>(this.thingsUrl);
-  }
-
-  getAreas(): Observable<Area[]> {
-    return this.http.get<Area[]>(this.areasUrl);
-  }
 }

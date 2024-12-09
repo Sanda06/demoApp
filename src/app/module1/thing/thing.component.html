@@ -1,3 +1,14 @@
-<ul>
-    <li *ngFor="let thing of things">{{ thing.sku }} - {{ thing.status }}</li>
-  </ul>
+<div class="items">
+  <div
+    *ngFor="let item of things()"
+    class="item"
+    [ngClass]="{
+      'joined': item.joinedWith,
+      'status-open': item.status === 'open',
+      'status-closed': item.status === 'closed'
+    }"
+  >
+    {{ item.sku }}
+    <sup *ngIf="item.defaultSku">{{ item.defaultSku }}</sup>
+  </div>
+</div>

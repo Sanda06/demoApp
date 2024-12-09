@@ -1,19 +1,16 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ExampleService, Thing } from '../../example.service';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
+import {  Thing } from '../../example.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-thing',
   templateUrl: './thing.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./thing.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule],
+  standalone: true
 })
-export class ThingComponent implements OnInit {
-  things: Thing[] = [];
+export class ThingComponent {
+  public readonly things = input<Thing[]>([]) ;
 
-  constructor(private exampleService: ExampleService) {}
-
-  ngOnInit(): void {
-    this.exampleService.getThings().subscribe(data => {
-      this.things = data;
-    });
-  }
 }

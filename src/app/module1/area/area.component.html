@@ -1,3 +1,9 @@
-<ul>
-    <li *ngFor="let area of areas">{{ area.name }}</li>
-  </ul>
+<h1>Areas</h1>
+
+<div class="zones-container">
+  <div *ngFor="let zone of areas()" class="zone">
+    <h3>{{ zone.name }}</h3>
+
+    <app-thing [things]="getItemsForZone(zone.areaId)"></app-thing>
+  </div>
+</div>

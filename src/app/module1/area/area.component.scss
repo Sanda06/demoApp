@@ -1,0 +1,16 @@
+.zones-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #001844; // Navy background
+    padding: 20px;
+  
+    .zone {
+      margin-bottom: 20px;
+  
+      h3 {
+        color: #fff;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  
